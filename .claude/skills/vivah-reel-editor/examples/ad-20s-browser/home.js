@@ -1,0 +1,11 @@
+const {chromium,devices}=require('playwright');const fs=require('fs');
+(async()=>{const b=await chromium.launch();const c=await b.newContext({...devices['iPhone 13'],deviceScaleFactor:3});const p=await c.newPage();
+await p.goto('about:blank');await p.setContent('<html style="background:#fff"></html>');
+fs.rmSync('hf',{recursive:true,force:true});fs.mkdirSync('hf');
+const s=await c.newCDPSession(p);const frames=[];
+s.on('Page.screencastFrame',async e=>{const i=frames.length;frames.push(e.metadata.timestamp);fs.writeFileSync(`hf/${String(i).padStart(5,'0')}.jpg`,Buffer.from(e.data,'base64'));try{await s.send('Page.screencastFrameAck',{sessionId:e.sessionId});}catch(_){}});
+await s.send('Page.startScreencast',{format:'jpeg',quality:90,maxWidth:1170,maxHeight:2532,everyNthFrame:1});
+await p.waitForTimeout(800);const t0=Date.now()/1000;
+await p.goto('https://vivah.online/',{waitUntil:'load',timeout:60000});const tl=Date.now()/1000;
+await p.waitForTimeout(3500);
+await s.send('Page.stopScreencast');fs.writeFileSync('hf_meta.json',JSON.stringify({frames,t0,tl}));console.log(frames.length,tl-t0);await b.close();})();

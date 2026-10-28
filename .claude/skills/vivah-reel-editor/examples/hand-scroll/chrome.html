@@ -1,0 +1,56 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:2340px;background:transparent;overflow:hidden;font-family:-apple-system,"SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif}
+#sb{position:absolute;left:0;top:0;width:1080px;height:150px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:22px 74px 0 84px;font-weight:600;font-size:48px;color:#000}
+#clock{color:#000;border-radius:40px;padding:4px 26px;font-size:46px}
+#sb .r{display:flex;gap:16px;align-items:center}
+.bars{display:flex;gap:6px;align-items:flex-end}.bars i{width:9px;background:#000;border-radius:2px;display:block}
+.bat{width:74px;height:36px;border:3px solid rgba(0,0,0,.4);border-radius:11px;padding:3px;position:relative}.bat b{display:block;height:100%;width:72%;background:#000;border-radius:5px}
+.bat:after{content:'';position:absolute;right:-9px;top:10px;width:5px;height:12px;background:rgba(0,0,0,.4);border-radius:0 3px 3px 0}
+#bb{position:absolute;left:0;top:1989px;width:1080px;height:351px;background:rgba(248,248,250,.97);border-top:1px solid #ddd;padding:26px 28px 0;display:flex;gap:22px;align-items:flex-start}
+.ib{width:120px;height:120px;border-radius:60px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-size:52px;color:#222}
+#pill{flex:1;height:120px;background:#fff;border-radius:60px;box-shadow:0 2px 12px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-size:42px;color:#000;gap:10px;position:relative;overflow:hidden}
+#pill .aa{position:absolute;left:34px;font-size:38px;font-weight:600}
+#pill .rl{position:absolute;right:34px;font-size:44px;color:#333}
+#prog{position:absolute;left:0;bottom:0;height:7px;background:#0a84ff;width:0}
+#hi{position:absolute;left:50%;bottom:22px;width:400px;height:15px;margin-left:-200px;background:#111;border-radius:8px}
+#typ{display:none;position:absolute;left:0;top:150px;width:1080px;height:2190px;background:#f2f2f7}
+#typ .fav{padding:60px 54px 30px;font-size:52px;font-weight:700;color:#000}
+.favs{display:flex;gap:56px;padding:10px 54px}.favs div{width:160px;text-align:center;font-size:30px;color:#555}.favs i{display:block;width:160px;height:160px;border-radius:36px;background:#fff;margin-bottom:14px;font-style:normal;font-size:70px;line-height:160px;color:#888}
+#sugg{position:absolute;left:30px;right:30px;bottom:1010px;background:#fff;border-radius:28px;padding:30px 36px;font-size:42px;display:none;gap:26px;align-items:center}
+#sugg .ic{width:76px;height:76px;border-radius:18px;background:#fde8ec;display:flex;align-items:center;justify-content:center;font-size:42px;color:#D62E55}
+#typ .bar{position:absolute;left:0;right:0;bottom:820px;height:160px;display:flex;align-items:center;padding:0 30px;gap:26px}
+#typ .fld{flex:1;height:120px;background:#fff;border-radius:60px;display:flex;align-items:center;padding:0 40px;font-size:44px;color:#000;box-shadow:0 2px 12px rgba(0,0,0,.1)}
+#typ .fld .ph{color:#8e8e93}
+#typ .cur{display:inline-block;width:4px;height:56px;background:#0a84ff;margin-left:2px;vertical-align:middle}
+#typ .cancel{font-size:44px;color:#0a84ff}
+#kb{position:absolute;left:0;bottom:0;width:1080px;height:820px;background:#d1d3d9;padding:24px 8px 0}
+.row{display:flex;justify-content:center;gap:16px;margin-bottom:28px}
+.k{width:88px;height:132px;background:#fff;border-radius:14px;box-shadow:0 3px 0 #898a8d;display:flex;align-items:center;justify-content:center;font-size:58px;color:#000}
+.k.w{width:130px;background:#abb0ba;font-size:40px}.k.sp{width:460px;font-size:40px}.k.go{width:240px;background:#0a84ff;color:#fff;font-size:42px}
+#kb #hi2{position:absolute;left:50%;bottom:22px;width:400px;height:15px;margin-left:-200px;background:#111;border-radius:8px}
+</style></head><body>
+<div id="sb"><span id="clock">6:37</span><span class="r"><span class="bars"><i style="height:14px"></i><i style="height:20px"></i><i style="height:27px"></i><i style="height:34px"></i></span><span style="font-size:42px">5G</span><span class="bat"><b></b></span></span></div>
+<div id="bb"><span class="ib">‹</span><div id="pill"><span class="aa">⚏</span><span id="dom">vivah.online</span><span class="rl">↻</span><div id="prog"></div></div><span class="ib">⋯</span><div id="hi"></div></div>
+<div id="typ"><div class="fav">Favourites</div>
+<div class="favs"><div><i>G</i>Google</div><div><i>Y</i>YouTube</div><div><i>W</i>Wikipedia</div><div><i>A</i>Amazon</div></div>
+<div id="sugg"><span class="ic">♥</span><span><b>vivah.online</b><br><span style="color:#8e8e93;font-size:36px">vivah.online — Wedding websites</span></span></div>
+<div class="bar"><div class="fld"><span id="tx"></span><span class="cur" id="cur"></span><span class="ph" id="ph">Search or enter website name</span></div><span class="cancel">Cancel</span></div>
+<div id="kb">
+<div class="row">QWERTYUIOP</div><div class="row" style="padding:0 50px">ASDFGHJKL</div>
+<div class="row"><span class="k w">⇧</span>ZXCVBNM<span class="k w">⌫</span></div>
+<div class="row"><span class="k w">123</span><span class="k w">🌐</span><span class="k sp">space</span><span class="k w">.</span><span class="k go" id="go">go</span></div>
+<div id="hi2"></div></div></div>
+<script>
+document.querySelectorAll('.row').forEach(r=>{const n=[...r.childNodes];r.innerHTML='';n.forEach(x=>{if(x.nodeType===3){for(const ch of x.textContent.trim())r.insertAdjacentHTML('beforeend',`<span class="k" data-k="${ch.toLowerCase()}">${ch.toLowerCase()}</span>`)}else r.appendChild(x)})});
+window.mode=(m,o)=>{o=o||{};document.getElementById('dom').textContent=o.dom||'vivah.online';
+ document.getElementById('typ').style.display=m=='typing'?'block':'none';document.getElementById('bb').style.display=m=='typing'?'none':'flex';
+ document.getElementById('prog').style.width=(o.prog||0)+'%';document.getElementById('prog').style.opacity=o.prog>0&&o.prog<100?1:0;
+ if(m=='typing'){const s=o.text||'';document.getElementById('tx').textContent=s;document.getElementById('ph').style.display=s?'none':'inline';
+  document.getElementById('cur').style.visibility=o.blink?'visible':'hidden';document.getElementById('sugg').style.display=s.length>=3?'flex':'none';
+  document.querySelectorAll('.k').forEach(k=>{k.style.background='';});
+  if(o.press){const k=o.press=='go'?document.getElementById('go'):document.querySelector(`.k[data-k="${o.press}"]`);if(k)k.style.background=o.press=='go'?'#0060df':'#c7c9cf';}}
+};
+window.goRect=()=>{const r=document.getElementById('go').getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2]};
+</script></body></html>

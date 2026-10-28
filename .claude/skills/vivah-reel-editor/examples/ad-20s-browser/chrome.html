@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;background:transparent;overflow:hidden;font-family:-apple-system,"SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif}
+#sb{position:absolute;left:0;top:0;width:1080px;height:130px;background:#fff;display:flex;align-items:flex-end;justify-content:space-between;padding:0 70px 22px 92px;font-weight:600;font-size:46px;color:#000}
+#sb .r{display:flex;gap:16px;align-items:center}
+.bars{display:flex;gap:6px;align-items:flex-end}.bars i{width:9px;background:#000;border-radius:2px;display:block}
+.bat{width:72px;height:34px;border:3px solid rgba(0,0,0,.4);border-radius:10px;padding:3px;position:relative}.bat b{display:block;height:100%;width:78%;background:#000;border-radius:5px}
+.bat:after{content:'';position:absolute;right:-9px;top:10px;width:5px;height:12px;background:rgba(0,0,0,.4);border-radius:0 3px 3px 0}
+#ub{position:absolute;left:0;top:130px;width:1080px;height:120px;background:#fff;border-bottom:1px solid #e5e5e5;display:flex;align-items:center;padding:0 30px}
+#pill{flex:1;height:92px;background:#eeeef0;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:40px;color:#000;gap:12px;position:relative}
+#pill .aa{position:absolute;left:28px;font-size:36px;font-weight:600}
+#pill .rl{position:absolute;right:28px;font-size:40px;color:#333}
+#prog{position:absolute;left:0;bottom:-2px;height:6px;background:#0a84ff;width:0}
+#typ{display:none;position:absolute;left:0;top:130px;width:1080px;height:1790px;background:#f2f2f7}
+#typ .bar{height:120px;display:flex;align-items:center;padding:0 30px;gap:24px;background:#f2f2f7}
+#typ .fld{flex:1;height:92px;background:#fff;border-radius:24px;display:flex;align-items:center;padding:0 30px;font-size:42px;color:#000}
+#typ .fld .ph{color:#8e8e93}
+#typ .cur{display:inline-block;width:4px;height:52px;background:#0a84ff;margin-left:2px;vertical-align:middle}
+#typ .cancel{font-size:42px;color:#0a84ff}
+#typ .fav{padding:60px 50px;font-size:48px;font-weight:700;color:#000}
+#sugg{margin:0 30px;background:#fff;border-radius:24px;padding:28px 34px;font-size:40px;display:none;gap:24px;align-items:center}
+#sugg .ic{width:70px;height:70px;border-radius:16px;background:#fde8ec;display:flex;align-items:center;justify-content:center;font-size:40px}
+#kb{position:absolute;left:0;bottom:0;width:1080px;height:760px;background:#d1d3d9;padding:20px 8px 0}
+.row{display:flex;justify-content:center;gap:16px;margin-bottom:26px}
+.k{width:88px;height:128px;background:#fff;border-radius:14px;box-shadow:0 3px 0 #898a8d;display:flex;align-items:center;justify-content:center;font-size:56px;color:#000}
+.k.w{width:130px;background:#abb0ba;font-size:40px}.k.sp{width:460px;font-size:40px}.k.go{width:240px;background:#0a84ff;color:#fff;font-size:42px}
+.k.dn{background:#abb0ba}
+</style></head><body>
+<div id="sb"><span id="clock">9:41</span><span class="r"><span class="bars"><i style="height:14px"></i><i style="height:20px"></i><i style="height:27px"></i><i style="height:34px"></i></span><span style="font-size:40px">5G</span><span class="bat"><b></b></span></span></div>
+<div id="ub"><div id="pill"><span class="aa">AA</span><span>🔒</span><span id="dom">vivah.online</span><span class="rl">↻</span></div><div id="prog"></div></div>
+<div id="typ"><div class="bar"><div class="fld"><span id="tx"></span><span class="cur" id="cur"></span><span class="ph" id="ph">Search or enter website name</span></div><span class="cancel">Cancel</span></div>
+<div id="sugg"><span class="ic">♥</span><span><b>vivah.online</b><br><span style="color:#8e8e93;font-size:34px">vivah.online — Wedding websites</span></span></div>
+<div class="fav">Favourites</div>
+<div id="kb">
+<div class="row">QWERTYUIOP</div><div class="row" style="padding:0 50px">ASDFGHJKL</div>
+<div class="row"><span class="k w">⇧</span>ZXCVBNM<span class="k w">⌫</span></div>
+<div class="row"><span class="k w">123</span><span class="k w">🌐</span><span class="k sp">space</span><span class="k w">.</span><span class="k go" id="go">go</span></div>
+</div></div>
+<script>
+document.querySelectorAll('.row').forEach(r=>{const n=[...r.childNodes];r.innerHTML='';n.forEach(x=>{if(x.nodeType===3){for(const ch of x.textContent.trim())r.insertAdjacentHTML('beforeend',`<span class="k" data-k="${ch.toLowerCase()}">${ch.toLowerCase()}</span>`)}else r.appendChild(x)})});
+window.mode=(m,o)=>{o=o||{};document.getElementById('dom').textContent=o.dom||'vivah.online';
+ document.getElementById('typ').style.display=m=='typing'?'block':'none';document.getElementById('ub').style.display=m=='typing'?'none':'flex';
+ document.getElementById('prog').style.width=(o.prog||0)+'%';document.getElementById('prog').style.opacity=o.prog>0&&o.prog<100?1:0;
+ if(m=='typing'){const s=o.text||'';document.getElementById('tx').textContent=s;document.getElementById('ph').style.display=s?'none':'inline';
+  document.getElementById('cur').style.visibility=o.blink?'visible':'hidden';document.getElementById('sugg').style.display=s.length>=3?'flex':'none';
+  document.querySelectorAll('.k').forEach(k=>{k.style.background='';});
+  if(o.press){const k=o.press=='go'?document.getElementById('go'):document.querySelector(`.k[data-k="${o.press}"]`);if(k)k.style.background=o.press=='go'?'#0060df':'#c7c9cf';}}
+};
+</script></body></html>

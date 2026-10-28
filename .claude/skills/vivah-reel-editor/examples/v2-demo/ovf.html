@@ -1,0 +1,76 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Huninn&family=Permanent+Marker&display=block">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:transparent}
+.abs{position:absolute}
+/* top hook title, reference style: white bold with dark outline + emoji */
+#hook{left:60px;width:960px;top:150px;text-align:center;font-family:'Poppins';font-weight:800;font-size:80px;line-height:1.08;color:#fff;
+ -webkit-text-stroke:5px #2a1420;paint-order:stroke fill;text-shadow:0 6px 14px rgba(0,0,0,.35)}
+#hook img{width:110px;vertical-align:-18px;margin-right:6px}
+/* keyword pop: pill label with sticker */
+.pop{display:flex;align-items:center;gap:14px;font-family:'Poppins';font-weight:900;font-size:64px;color:#fff;white-space:nowrap}
+.pop span{background:#D62E55;padding:10px 30px 16px;border-radius:24px;box-shadow:0 10px 24px rgba(0,0,0,.35);border:5px solid #fff}
+.pop span.j{background:#5B2A86}
+.pop img{width:130px;height:130px;filter:drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(4px 8px 6px rgba(0,0,0,.3))}
+.rip{width:150px;height:150px;border-radius:50%;border:10px solid rgba(255,255,255,.95);box-shadow:0 0 0 6px rgba(214,46,85,.6)}
+.dot{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+#price{left:540px;top:430px;width:480px;text-align:center;background:#FFFCF8;border:10px solid #D62E55;border-radius:30px;padding:20px 10px 26px;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+#price .a{font-family:'Poppins';font-weight:800;font-size:40px;color:#3D1F2E;letter-spacing:2px}
+#price .b{font-family:'Poppins';font-weight:900;font-size:150px;color:#D62E55;line-height:1}
+#price .c{font-family:'Poppins';font-weight:800;font-size:34px;color:#3D1F2E}
+#end{inset:0;background:#FFFCF8;display:flex;flex-direction:column;align-items:center;padding-top:150px}
+#end img{width:500px}
+#end .t{font-family:'Huninn';font-size:62px;color:#3D1F2E;margin-top:50px;text-align:center;line-height:1.2}
+#end .u{margin-top:34px;background:#D62E55;color:#fff;font-family:'Huninn';font-size:78px;padding:14px 56px 24px;border-radius:70px}
+#end .p{margin-top:34px;font-family:'Poppins';font-weight:800;font-size:46px;color:#5B2A86}
+#cpn{position:absolute;left:520px;top:1080px;width:520px;padding-left:10px!important;padding-right:10px!important;border:6px dashed #D62E55;border-radius:30px;background:#FFF0F4;padding:18px 70px 22px;text-align:center;opacity:0}
+#cpn .k{font-family:'Poppins';font-weight:800;font-size:36px;letter-spacing:6px;color:#3D1F2E}
+#cpn .c{font-family:'Poppins';font-weight:900;font-size:110px;line-height:1.05;color:#D62E55;letter-spacing:6px}
+#cpn .o{font-family:'Poppins';font-weight:900;font-size:60px;color:#5B2A86}
+</style></head><body>
+<div id="end" class="abs"><img src="../r2/logo-stacked-1810.png"><div class="t">Apne guests ko<br>naam wala invite bhejo 💌</div><div class="u">vivah.online</div><div class="p">Sirf ₹799 · Free preview</div><div id="cpn"><div class="k">COUPON CODE</div><div class="c">NEW30</div><div class="o">30% OFF 🎉</div></div></div>
+<div id="hook" class="abs"><img src="../r2/st/ring.png">Shaadi 2026 mein hai?</div>
+<div id="pops"></div>
+<div id="price" class="abs"><div class="a">POORA INVITE</div><div class="b">₹799</div><div class="c">one time · 5 min mein ready</div></div>
+<div id="rips"></div>
+<script>
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const lin=(t,a,b)=>clamp((t-a)/(b-a));
+const eOut=x=>1-Math.pow(1-x,3);
+const eBack=x=>{const c=2.2;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+function set(el,o,x=0,y=0,s=1,r=0){el.style.opacity=o;el.style.transform=`translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;}
+const G=[0,4.75,10.6,15.7,22.25,26.8], END=G[5]+5.32, TN=G[5]+7.35, DUR=38.8;
+// keyword pops: [time, t1, text, sticker, x, y, purple?]
+const P=[
+ [G[0]+1.38,G[1]-0.1,'WEBSITE?','thinking',560,560,0],
+ [G[1]+0.74,G[1]+2.85,'APNA NAAM','eyes',520,470,0],
+ [G[2]+0.0,G[2]+2.6,'SCRATCH KARO','sparkle',360,330,1],
+ [G[2]+3.58,G[3]-0.05,'LIVE COUNTDOWN','stopwatch',300,330,0],
+ [G[3]+0.84,G[3]+2.5,'GOOGLE MAPS','pin',380,300,1],
+ [G[3]+2.58,G[4]-0.05,'SAARE FUNCTIONS','party',300,300,0],
+ [G[4]+0.0,G[4]+2.6,'RSVP ✅','phone',560,330,1],
+ [G[4]+2.64,G[5]-0.05,'KAUN AA RAHA HAI','check',260,330,0],
+];
+const pops=P.map(([a,b,tx,st,x,y,j])=>{const d=document.createElement('div');d.className='abs pop';d.style.left=x+'px';d.style.top=y+'px';d.innerHTML=`<span class="${j?'j':''}">${tx}</span><img src="../r2/st/${st}.png">`;$('pops').appendChild(d);
+ // keep inside frame
+ return {a,b,d,x};});
+// tap ripples [time, x, y]
+const R=[[G[1]+2.88,540,1620]];
+const rips=R.map(([a,x,y])=>{const d=document.createElement('div');d.className='abs';d.innerHTML='<div class="dot abs" style="left:-35px;top:-35px"></div><div class="rip abs" style="left:-75px;top:-75px"></div>';d.style.left=x+'px';d.style.top=y+'px';$('rips').appendChild(d);return {a,d};});
+function fit(){pops.forEach(p=>{const w=p.d.getBoundingClientRect().width;if(p.x+w>1050)p.d.style.left=Math.max(30,1050-w)+'px';});}
+function render(t){
+ {const a=0.15,b=G[1]-0.1;const k=lin(t,a,a+0.3);set($('hook'),t>=a&&t<b?Math.min(1,k*2)*(1-lin(t,b-0.15,b)):0,0,(1-eOut(k))*-40,0.8+0.2*eBack(k));}
+ pops.forEach(({a,b,d})=>{const on=t>=a&&t<b;const k=lin(t,a,a+0.28);set(d,on?Math.min(1,k*2.5)*(1-lin(t,b-0.12,b)):0,0,0,0.3+0.7*eBack(k),on?Math.sin((t-a)*3)*2-2:0);});
+ rips.forEach(({a,d})=>{const k=lin(t,a-0.15,a+0.45);const on=t>=a-0.15&&t<a+0.5;d.style.opacity=on?1-lin(t,a+0.2,a+0.5):0;
+  d.children[0].style.transform=`scale(${t<a?1:0.75})`;d.children[1].style.transform=`scale(${0.4+eOut(lin(t,a,a+0.45))*0.9})`;d.children[1].style.opacity=t>=a?1:0;});
+ {const a=G[5]+0.84,b=END-0.05;const k=lin(t,a,a+0.25);set($('price'),t>=a&&t<b?Math.min(1,k*2):0,0,0,1.8-0.8*eOut(k),-4);}
+ {const k=lin(t,END,END+0.3);$('end').style.opacity=k;$('end').style.transform=`scale(${1.06-0.06*eOut(k)})`;}
+ {const k=lin(t,TN+0.25,TN+0.5);const c=$('cpn');c.style.opacity=t>=TN+0.25?Math.min(1,k*2):0;c.style.transform=`scale(${1.6-0.6*eBack(k)}) rotate(${-3*(1-k)}deg)`;}
+}
+window.render=render;
+window.imgReady=()=>Promise.all([...document.images].filter(i=>!i.complete).map(i=>new Promise(r=>{i.onload=i.onerror=r;})));
+document.fonts.ready.then(()=>{fit();render(0);});
+</script></body></html>

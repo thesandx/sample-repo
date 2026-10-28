@@ -1,0 +1,28 @@
+const {chromium,devices}=require('playwright');const fs=require('fs');
+(async()=>{const b=await chromium.launch();const c=await b.newContext({...devices['iPhone 13'],deviceScaleFactor:3});const p=await c.newPage();
+await p.goto('https://priya-rahul.vivah.online/Neha',{waitUntil:'networkidle'});await p.waitForTimeout(2500);
+fs.rmSync('fr',{recursive:true,force:true});fs.mkdirSync('fr');
+const s=await c.newCDPSession(p);const frames=[];const T0=Date.now();const marks=[];
+s.on('Page.screencastFrame',async e=>{const i=frames.length;frames.push(e.metadata.timestamp);fs.writeFileSync(`fr/${String(i).padStart(5,'0')}.jpg`,Buffer.from(e.data,'base64'));try{await s.send('Page.screencastFrameAck',{sessionId:e.sessionId});}catch(_){}});
+await s.send('Page.startScreencast',{format:'jpeg',quality:88,maxWidth:1170,maxHeight:2532,everyNthFrame:1});
+const mark=n=>marks.push([n,Date.now()/1000]);
+const W=ms=>p.waitForTimeout(ms);
+const scrollTo=async(y,ms)=>{await p.evaluate(([y,ms])=>new Promise(r=>{const y0=scrollY,t0=performance.now();const f=t=>{const k=Math.min(1,(t-t0)/ms);const e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;scrollTo(0,y0+(y-y0)*e);k<1?requestAnimationFrame(f):r();};requestAnimationFrame(f);}),[y,ms]);};
+const scratch=async(cx,cy)=>{await p.mouse.move(cx-40,cy-40);await p.mouse.down();for(let i=0;i<14;i++){await p.mouse.move(cx-40+(i%2?80:0),cy-45+i*7,{steps:4});}await p.mouse.up();};
+mark('gate');await W(2200);
+mark('tap');await p.mouse.click(195,560);await W(2500);
+const el=async sel=>p.evaluate(s=>{const e=document.querySelector(s);return e?e.getBoundingClientRect().top+scrollY:null;},sel);
+const cv=await p.$$eval('canvas',cs=>cs.map(c=>{const r=c.getBoundingClientRect();return [r.left+r.width/2,r.top+scrollY+r.height/2];}));
+console.log('canvas',JSON.stringify(cv));
+const sy=cv.length?cv[0][1]-420:900;
+mark('scroll1');await scrollTo(sy,1800);await W(400);
+mark('scratch');for(const [x,y] of cv.filter((_,i)=>i%2==0)){await scratch(x,y-sy);await W(150);}await W(1200);
+const hs=await p.$$eval('h1,h2,h3',hs=>hs.map(h=>[h.innerText.trim().slice(0,30),h.getBoundingClientRect().top+scrollY]));console.log(JSON.stringify(hs));
+fs.writeFileSync('heads.json',JSON.stringify(hs));
+mark('rest');
+let y=sy;const H=await p.evaluate(()=>document.documentElement.scrollHeight-innerHeight);
+while(y<H){y=Math.min(H,y+520);await scrollTo(y,1100);await W(900);mark('y'+Math.round(y));}
+await W(1500);
+await s.send('Page.stopScreencast');
+fs.writeFileSync('meta.json',JSON.stringify({frames,marks}));console.log('frames',frames.length,'dur',frames[frames.length-1]-frames[0]);
+await b.close();})();

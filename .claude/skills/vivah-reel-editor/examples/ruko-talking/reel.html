@@ -1,0 +1,193 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bungee&family=Abril+Fatface&family=Permanent+Marker&family=Rubik+Mono+One&family=Courier+Prime:wght@700&family=Poppins:wght@600;800&family=Huninn&family=Baloo+2:wght@600;800&display=block">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#111}
+body{position:relative;font-family:'Poppins',sans-serif}
+.abs{position:absolute}
+#bgwrap{inset:0;overflow:hidden}
+#bg{position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover;transform-origin:50% 38%}
+#dim{inset:0;background:rgba(30,10,20,.55);backdrop-filter:blur(0px);opacity:0}
+#vig{inset:0;background:linear-gradient(180deg,rgba(0,0,0,.22) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 72%,rgba(0,0,0,.28) 100%)}
+#strip{left:-20px;top:96px;width:1120px;height:200px;background:linear-gradient(rgba(255,252,246,.6),rgba(255,252,246,.6)),url(paper.webp) center/cover;
+ clip-path:polygon(0% 8%,4% 2%,9% 7%,15% 1%,21% 6%,27% 2%,33% 8%,40% 3%,46% 7%,53% 1%,60% 6%,66% 2%,73% 8%,80% 3%,86% 7%,93% 2%,100% 6%,100% 92%,95% 98%,89% 93%,82% 99%,76% 94%,69% 98%,62% 93%,55% 99%,48% 94%,41% 98%,34% 92%,27% 98%,20% 93%,13% 99%,7% 94%,0% 97%);
+ box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.L{display:inline-block;padding:4px 10px 6px;font-size:108px;line-height:1;box-shadow:2px 3px 0 rgba(0,0,0,.18)}
+/* captions: highlight style, active word on a sindoor pill */
+#cap{left:60px;width:960px;text-align:center}
+#cap .w{display:inline-block;color:#fff;font-family:'Archivo Black';font-size:62px;line-height:1.15;padding:2px 14px 8px;margin:0 2px;border-radius:14px;
+ -webkit-text-stroke:3px #1a1a1a;paint-order:stroke fill;text-shadow:0 5px 0 rgba(0,0,0,.35)}
+#cap .w.on{background:#D62E55;-webkit-text-stroke:0;text-shadow:none}
+#cap .w.y{color:#FFD84D}
+.st{width:220px;height:220px}
+.st img{width:100%;height:100%;filter:drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff) drop-shadow(6px 8px 6px rgba(0,0,0,.3))}
+#note{left:560px;top:760px;width:440px;height:490px;background:url(note.png) center/100% 100% no-repeat;filter:drop-shadow(6px 10px 14px rgba(0,0,0,.35));padding:130px 44px 30px;font-family:'Permanent Marker';color:#2a2a2a;font-size:54px;line-height:1.1;text-align:center}
+#note .x{position:relative;display:inline-block}
+#note .x i{position:absolute;left:-8px;top:50%;height:10px;background:#D62E55;border-radius:5px;transform:rotate(-7deg)}
+#frame{left:250px;top:330px;width:580px;height:1214px;background:#fff;padding:18px;border-radius:30px;box-shadow:0 30px 70px rgba(0,0,0,.55)}
+#frame .in{width:544px;height:1178px;border-radius:16px;overflow:hidden;position:relative;background:#000}
+#frame .in img{position:absolute;left:0;top:0;width:544px;height:1178px;object-fit:cover;object-position:top}
+#ring{left:0;top:0;width:1080px;height:1920px;pointer-events:none}
+#hwlab{left:0;width:1080px;top:1560px;text-align:center;font-family:'Permanent Marker';font-size:60px;color:#fff;text-shadow:0 4px 0 #D62E55,0 6px 14px rgba(0,0,0,.4)}
+#notifs{left:150px;top:420px;width:780px}
+.nf{display:flex;align-items:center;gap:22px;background:rgba(250,250,250,.94);border-radius:34px;padding:22px 28px;margin-bottom:18px;box-shadow:0 14px 34px rgba(0,0,0,.35);font-family:'Poppins'}
+.nf .ic{width:84px;height:84px;border-radius:20px;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:50px;flex:none}
+.nf .tx b{display:block;font-size:34px;color:#111}
+.nf .tx span{font-size:32px;color:#333;font-weight:600}
+.nf .tm{margin-left:auto;align-self:flex-start;font-size:26px;color:#777}
+#hw{left:0;width:1080px;top:150px;text-align:center;font-family:'Permanent Marker';font-size:76px;color:#1d1d1d}
+#hw span{background:linear-gradient(#FFD84D,#FFD84D) no-repeat 0 78%/0% 42%;padding:0 14px}
+#hwbox{left:90px;width:900px;top:120px;height:180px;background:#FFFCF8;border-radius:20px;transform:rotate(-2deg);box-shadow:0 10px 24px rgba(0,0,0,.3)}
+#stamp{left:140px;top:1230px;width:800px;white-space:nowrap;text-align:center;font-family:'Rubik Mono One';color:#D62E55;font-size:96px;line-height:1;border:12px solid #D62E55;border-radius:22px;padding:24px 10px 30px;background:rgba(255,252,248,.88)}
+#stamp small{display:block;font-family:'Poppins';font-weight:800;font-size:40px;letter-spacing:4px;color:#3D1F2E;margin-top:12px}
+#end{inset:0;background:#FFFCF8;display:flex;flex-direction:column;align-items:center;padding-top:330px}
+#end img{width:560px}
+#end .t{font-family:'Huninn';font-size:66px;color:#3D1F2E;margin-top:70px;text-align:center;line-height:1.2}
+#end .u{margin-top:40px;background:#D62E55;color:#fff;font-family:'Huninn';font-size:80px;padding:16px 60px 26px;border-radius:70px}
+#flashw{inset:0;background:#fff;opacity:0}
+</style></head><body>
+<div id="bgwrap" class="abs"><img id="bg" src="bg/f00000.jpg"></div>
+<div id="vig" class="abs"></div>
+<div id="dim" class="abs"></div>
+<div id="note" class="abs"><div>Paper cards</div><div><span class="x">₹15,000<i></i></span></div><div style="font-size:42px;margin-top:12px">drawer mein 🙄</div></div>
+<div id="frame" class="abs"><div class="in"><img id="scr" src="scr/guest-NaniJi-ganesh-card.jpg"></div></div>
+<svg id="ring" class="abs" viewBox="0 0 1080 1920"><path id="ringp" fill="none" stroke="#FFD84D" stroke-width="12" stroke-linecap="round"/></svg>
+<div id="notifs" class="abs"></div>
+<div id="hwlab" class="abs">Har guest ka apna naam! 😍</div>
+<div id="stamp" class="abs">SIRF ₹799<small>ONE TIME · 5 MIN MEIN READY</small></div>
+<div id="hwbox" class="abs"></div>
+<div id="hw" class="abs"><span id="hwt">vivah.online pe banaya ✨</span></div>
+<div id="strip" class="abs"></div>
+<div id="titles"></div>
+<div id="stickers"></div>
+<div id="cap" class="abs"></div>
+<div id="end" class="abs"><img src="logo-stacked-1810.png"><div class="t">Apna card banao,<br>free preview 👇</div><div class="u">vivah.online</div><div class="t" style="font-size:48px;margin-top:50px">Link bio mein hai 💌</div></div>
+<div id="flashw" class="abs"></div>
+<script>
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const lin=(t,a,b)=>clamp((t-a)/(b-a));
+const eOut=x=>1-Math.pow(1-x,3);
+const eBack=x=>{const c=2.2;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+function set(el,o,x=0,y=0,s=1,r=0){el.style.opacity=o;el.style.transform=`translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;}
+let seed=11;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+
+// segment starts on the master timeline (clip c1..c5), end card after
+const S=[0,4.6,9.9,16.4,21.6], BGEND=24.6, END=24.6, DUR=26.4;
+// word timings from Whisper (seconds within each clip) -> master time
+const W=[
+ [0,[[0,'RUKO!'],[1.28,'Shaadi'],[1.65,'ka'],[1.9,'card'],[2.16,'chhapwane'],[2.6,'se'],[2.74,'pehle'],[3.14,'ye'],[3.6,'zaroor'],[4.1,'dekh lo!']]],
+ [1,[[0.25,'Paper'],[0.98,'card'],[1.32,'pe'],[1.46,'₹15-20'],[2.06,'hazaar'],[2.52,'kharch...'],[2.98,'aur'],[3.66,'log'],[3.9,'usse'],[4.14,'kholte'],[4.6,'bhi'],[4.76,'nahi!']]],
+ [2,[[0,'Maine'],[0.34,'vivah.online'],[1.4,'pe'],[1.6,'card'],[1.92,'banaya.'],[3.0,'Har'],[3.26,'guest'],[3.66,'ko'],[3.76,'uske'],[4.02,'naam'],[4.34,'ke'],[4.56,'saath,'],[4.86,'seedha'],[5.58,'WhatsApp'],[6.18,'pe!']]],
+ [3,[[0,'Aur'],[0.54,'sirf'],[0.86,'₹799'],[2.1,'rupaye'],[2.52,'mein!'],[3.24,'Paanch'],[3.86,'minute'],[4.28,'mein'],[4.5,'ready!']]],
+ [4,[[0,'Link'],[0.58,'bio'],[0.88,'mein'],[1.14,'hai,'],[1.84,'abhi'],[2.14,'try'],[2.52,'karo!']]],
+];
+const YEL=new Set(['RUKO!','₹15-20','hazaar','nahi!','vivah.online','naam','WhatsApp','₹799','Paanch','minute','Link','bio']);
+const words=[];W.forEach(([si,ws])=>ws.forEach(([t,w])=>words.push({t:S[si]+t,w,si})));
+// caption groups: break at these words (index into words)
+const breaks=[0,1,4,7,10,13,16,19,22,24,27,31,34,37,40,42,46,50];
+
+const cuts=[0,1.28,S[1],S[1]+2.98,S[2],S[2]+3.0,S[3],S[3]+3.24,S[4],S[4]+1.84];
+const titles=[
+ {w:'RUKO!',t0:0,t1:1.28,st:'hand'},
+ {w:'CARD SE PEHLE',t0:1.28,t1:S[1],st:'eyes'},
+ {w:'₹15,000 BARBAAD',t0:S[1]+1.46,t1:S[2],st:'money'},
+ {w:'SIRF ₹799',t0:S[3]+0.86,t1:S[3]+3.24,st:'fire'},
+ {w:'5 MINUTE MEIN',t0:S[3]+3.24,t1:S[4],st:'stopwatch'},
+ {w:'LINK BIO MEIN',t0:S[4],t1:END,st:'point'},
+];
+const stickers=[
+ {s:'shock',x:90,y:820,t0:S[1]+0.2,t1:S[1]+2.4,sz:240},
+ {s:'trash',x:120,y:1000,t0:S[1]+4.76,t1:S[2],sz:230},
+ {s:'phone',x:90,y:900,t0:S[2]+0.34,t1:S[2]+3.0,sz:230},
+ {s:'party',x:820,y:1180,t0:S[3]+2.1,t1:S[3]+3.24,sz:220},
+ {s:'up',x:800,y:880,t0:S[4]+1.84,t1:END,sz:230},
+];
+const FONTS=["Anton","Archivo Black","Bungee","Abril Fatface","Rubik Mono One","Courier Prime","Poppins"];
+const PAL=[["#fff","#111"],["#111","#fff"],["#D62E55","#fff"],["#FFD84D","#111"],["#5B2A86","#fff"],["#F2E6D0","#7a1530"],["#fff","#D62E55"],["#FF7A9C","#fff"]];
+const TT=titles.map((ti,k)=>{seed=31+k*97;const box=document.createElement('div');box.className='abs';box.style.cssText='left:0;top:96px;width:1080px;height:200px;display:flex;align-items:center;justify-content:center;gap:4px';
+ const letters=[];
+ for(const ch of ti.w){ if(ch===' '){const sp=document.createElement('span');sp.style.width='24px';sp.style.display='inline-block';box.appendChild(sp);continue;}
+  const s=document.createElement('span');s.className='L';const p=PAL[Math.floor(rnd()*PAL.length)];s.style.background=p[0];s.style.color=p[1];s.style.fontFamily=ch==='₹'?'Poppins':FONTS[Math.floor(rnd()*FONTS.length)];s.textContent=ch;s.dataset.r=((rnd()-.5)*14).toFixed(1);s.dataset.y=((rnd()-.5)*16).toFixed(1);box.appendChild(s);letters.push(s);}
+ const im=document.createElement('div');im.className='st';im.style.cssText='width:150px;height:150px;flex:none;margin-left:12px';im.innerHTML=`<img src="st/${ti.st}.png">`;box.appendChild(im);
+ $('titles').appendChild(box);
+ return {ti,box,letters,im};
+});
+function fitTitles(){TT.forEach(({box,letters})=>{box.style.display='flex';let f=108;const Wd=()=>[...box.children].reduce((a,c)=>a+c.getBoundingClientRect().width+4,0);while(Wd()>1020&&f>52){f-=4;letters.forEach(l=>l.style.fontSize=f+'px');}box.style.display='none';});}
+const SS=stickers.map(st=>{const d=document.createElement('div');d.className='abs st';d.style.left=st.x+'px';d.style.top=st.y+'px';d.style.width=d.style.height=st.sz+'px';d.innerHTML=`<img src="st/${st.s}.png">`;$('stickers').appendChild(d);return {st,d};});
+
+// product scene inside c3: guest cards cycle, then RSVP screen + notifications
+const P0=S[2]+3.0, P1=S[3];
+const screens=[[P0,'guest-NaniJi-ganesh-card'],[P0+1.0,'guest-Neha-ganesh-card'],[P0+1.86,'guest-SharmaUncle-ganesh-card'],[P0+2.58,'rsvp-whatsapp']];
+const NF=[['Neha','Aa rahi hoon! 💃 ✅'],['Sharma Uncle','Pakka aayenge ✅'],['Nani ji','Dher saara aashirwad 🙏']];
+NF.forEach(([n,m])=>{const d=document.createElement('div');d.className='nf';d.innerHTML=`<div class="ic">💬</div><div class="tx"><b>${n} · RSVP</b><span>${m}</span></div><div class="tm">now</div>`;$('notifs').appendChild(d);});
+const nfs=[...document.querySelectorAll('.nf')];
+// hand-drawn ellipse around the guest name on the card (screen y ~0.86 of inner)
+function ellipse(cx,cy,rx,ry,k){let d='';const n=60,end=k*1.12;for(let i=0;i<=n;i++){const a=-2.3+end*2*Math.PI*i/n;const wob=1+0.04*Math.sin(i*1.7);d+=(i?'L':'M')+(cx+Math.cos(a)*rx*wob).toFixed(1)+' '+(cy+Math.sin(a)*ry*wob).toFixed(1);}return d;}
+
+let lastBg='',lastScr='';
+function render(t){
+ // background frames + punch zooms on cuts
+ const fi=Math.min(739,Math.floor(t*30+1e-6));const b='bg/f'+String(fi).padStart(5,'0')+'.jpg';if(b!==lastBg){$('bg').src=b;lastBg=b;}
+ let ci=0;for(let i=0;i<cuts.length;i++)if(t>=cuts[i])ci=i;
+ const lc=t-cuts[ci];const base=ci%2?1.15:1.02;const kick=0.06*(1-eOut(lin(lc,0,0.25)));
+ const shake=(t<0.45)?Math.sin(t*80)*12*(1-t/0.45):0;
+ $('bg').style.transform=`translate(${shake}px,0) scale(${base+kick+lc*0.01})`;
+ $('flashw').style.opacity=(ci>0?0.45*(1-lin(lc,0,0.08)):0);
+
+ // ransom titles
+ let anyT=false;
+ TT.forEach(({ti,box,letters,im})=>{const on=t>=ti.t0&&t<ti.t1;box.style.display=on?'flex':'none';if(!on)return;anyT=true;
+  const lt=t-ti.t0;letters.forEach((s,i)=>{const k=lin(lt,i*0.04,i*0.04+0.08);s.style.opacity=k>0?1:0;s.style.transform=`translateY(${s.dataset.y}px) rotate(${s.dataset.r}deg) scale(${1.4-0.4*eOut(k)})`;});
+  const k2=lin(lt,letters.length*0.04,letters.length*0.04+0.25);im.style.opacity=k2>0?1:0;im.style.transform=`scale(${0.2+0.8*eBack(k2)}) rotate(${Math.sin(lt*5)*8}deg)`;
+  box.style.opacity=1-lin(t,ti.t1-0.1,ti.t1);});
+ $('strip').style.opacity=anyT?1:0;
+
+ // product scene
+ const inP=t>=P0&&t<P1;
+ $('dim').style.opacity=inP?lin(t,P0,P0+0.2)*(1-lin(t,P1-0.1,P1)):0;
+ if(inP){const k=lin(t,P0,P0+0.35);set($('frame'),1-lin(t,P1-0.1,P1),0,(1-eOut(k))*1000,0.85+0.15*eBack(k),-2+Math.sin(t*2));
+  let sc=screens[0][1];screens.forEach(([a,s])=>{if(t>=a)sc=s;});const s='scr/'+sc+'.jpg';if(s!==lastScr){$('scr').src=s;lastScr=s;}
+  // swap punch on each screen change
+  let sa=P0;screens.forEach(([a])=>{if(t>=a)sa=a;});const kk=1-eOut(lin(t,sa,sa+0.2));$('scr').style.transform=`scale(${1+0.06*kk})`;
+  // ring around name on guest cards
+  const onCard=t<screens[3][0]&&t>=P0+0.35;const rk=onCard?eOut(lin(t,P0+0.35,P0+0.75)):0;
+  $('ringp').setAttribute('d',rk>0?ellipse(540,1356,250,78,rk):'');$('ring').style.opacity=onCard?1:0;
+  set($('hwlab'),onCard?lin(t,P0+0.5,P0+0.7):0,0,0,1,-3);
+  // notifications on RSVP screen
+  const n0=screens[3][0];nfs.forEach((d,i)=>{const a=n0+0.12+i*0.22;const k=lin(t,a,a+0.22);set(d,t>=a?Math.min(1,k*2):0,0,(1-eOut(k))*-120,0.9+0.1*eBack(k));});
+ } else {$('frame').style.opacity=0;$('ring').style.opacity=0;$('hwlab').style.opacity=0;nfs.forEach(d=>d.style.opacity=0);}
+
+ // handwritten highlight line (c3 opening)
+ {const a=S[2]+0.3,b=P0;const on=t>=a&&t<b;const o=on?lin(t,a,a+0.15)*(1-lin(t,b-0.1,b)):0;set($('hw'),o,0,0,1,-2);set($('hwbox'),o,0,0,0.9+0.1*eBack(lin(t,a,a+0.25)),-2);
+  $('hwt').style.backgroundSize=(eOut(lin(t,a+0.25,a+0.7))*100)+'% 42%';}
+
+ // captions
+ let wi=-1;words.forEach((w,i)=>{if(t>=w.t)wi=i;});
+ const stampOn=t>=S[3]+0.86&&t<S[3]+3.24;
+ if(wi>=0&&t<END&&!stampOn){let g=0;for(let i=0;i<breaks.length;i++)if(wi>=breaks[i])g=i;
+  const a=breaks[g];let h='';for(let i=a;i<=wi;i++){const w=words[i].w;h+=`<span class="w${i===wi?' on':''}${YEL.has(w)&&i!==wi?' y':''}">${w}</span>`;}
+  $('cap').innerHTML=h;$('cap').style.top=(inP?150:1300)+'px';$('cap').style.opacity=1;
+  const k=lin(t,words[wi].t,words[wi].t+0.08);$('cap').style.transform=`scale(${1+0.05*(1-k)})`;
+ } else $('cap').style.opacity=0;
+
+ // stickers
+ SS.forEach(({st,d})=>{const on=t>=st.t0&&t<st.t1;if(!on){d.style.opacity=0;return;}const lt=t-st.t0;const k=lin(lt,0,0.3);
+  set(d,1-lin(t,st.t1-0.1,st.t1),0,st.s==='up'?-Math.abs(Math.sin(lt*6))*24:0,0.2+0.8*eBack(k),Math.sin(lt*4)*7);});
+
+ // sticky note with strike on "nahi"
+ {const a=S[1]+1.46,b=S[2];const on=t>=a&&t<b;const k=lin(t-a,0,0.3);
+  set($('note'),on?1-lin(t,b-0.1,b):0,(1-eOut(k))*400,0,0.8+0.2*eBack(k),5);
+  $('note').querySelector('i').style.width=(eOut(lin(t,S[1]+4.6,S[1]+4.9))*112)+'%';}
+
+ // stamp
+ {const a=S[3]+0.86,b=S[3]+3.24;const on=t>=a&&t<b;const k=lin(t-a,0,0.18);set($('stamp'),on?Math.min(1,k*2)*(1-lin(t,b-0.1,b)):0,0,0,2.2-1.2*eOut(k),-8);}
+
+ // end card
+ {const k=lin(t,END,END+0.25);$('end').style.opacity=k;$('end').style.transform=`scale(${1.08-0.08*eOut(k)})`;}
+}
+window.render=render;
+window.imgReady=()=>Promise.all([...document.images].filter(i=>!i.complete).map(i=>new Promise(r=>{i.onload=i.onerror=r;})));
+document.fonts.ready.then(()=>{fitTitles();render(0);});
+</script></body></html>
