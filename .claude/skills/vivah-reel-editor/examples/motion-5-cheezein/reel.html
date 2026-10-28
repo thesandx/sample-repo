@@ -1,0 +1,200 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts/local.css">
+<style>
+:root{--sindoor:#D62E55;--jamun:#5B2A86;--plum:#3D1F2E;--plumsoft:#8A6274;--cream:#FFFCF8;--blush:#FF7A9C;--lotus:#D2B0E6;--paper2:#FDEFE4}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream)}
+body{font-family:'Huninn','Baloo 2','Noto Color Emoji',sans-serif;color:var(--plum);position:relative}
+.abs{position:absolute}
+#bg{inset:0;background:radial-gradient(900px 700px at 50% 38%,#FFE6EC 0%,rgba(255,230,236,0) 70%),radial-gradient(700px 600px at 85% 90%,#F1E4FA 0%,rgba(241,228,250,0) 70%),var(--cream)}
+.petal{width:26px;height:40px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;opacity:.55}
+.c{left:0;width:1080px;text-align:center}
+/* hook */
+#ruko{top:250px;font-size:190px;line-height:1;color:var(--sindoor);letter-spacing:2px}
+.hl{font-size:88px;line-height:1.12}
+#h1{top:470px}
+#h2{top:575px}
+#h3wrap{top:700px}
+#h3{display:inline-block;background:var(--sindoor);color:#fff;font-size:84px;padding:14px 40px 22px;border-radius:28px}
+#sticker{top:150px;left:0;width:1080px;text-align:center}
+#sticker span{display:inline-block;background:var(--jamun);color:#fff;font-size:40px;padding:12px 30px 16px;border-radius:60px}
+/* items */
+#bar{top:150px;left:100px;width:880px;height:14px;display:flex;gap:12px}
+#bar div{flex:1;background:#EBDCE3;border-radius:8px;overflow:hidden}
+#bar i{display:block;height:100%;width:0;background:var(--sindoor);border-radius:8px}
+#num{top:205px}
+#num span{display:inline-block;background:var(--jamun);color:#fff;font-size:42px;padding:8px 28px 12px;border-radius:40px}
+#title{top:282px;font-size:86px;line-height:1.05;white-space:nowrap}
+#sub{top:392px;font-size:48px;color:var(--plumsoft);white-space:nowrap}
+#tick{width:92px;height:92px;border-radius:50%;background:var(--sindoor);color:#fff;font-size:60px;line-height:92px;text-align:center}
+/* phone */
+#phone{left:240px;width:600px;height:1130px;border-radius:78px;background:#1b1116;padding:18px;box-shadow:0 40px 80px rgba(61,31,46,.28),0 0 0 3px #3a2a31 inset}
+#screen{width:564px;height:1094px;border-radius:62px;overflow:hidden;position:relative;background:#000}
+#screen img{width:584px;height:1094px;position:absolute;left:-10px;top:0}
+#island{left:50%;top:34px;width:150px;height:42px;margin-left:-75px;background:#000;border-radius:30px}
+#flash{inset:0;background:#fff;opacity:0}
+#tapdot{width:110px;height:110px;border-radius:50%;border:8px solid rgba(255,255,255,.9);background:rgba(214,46,85,.35)}
+/* price */
+.card{left:110px;width:860px;border-radius:44px;padding:40px 50px}
+#paper{top:420px;height:290px;background:#F4ECE8;color:#9b8a90}
+#paper .lbl{font-size:54px}
+#paper .amt{white-space:nowrap;font-size:96px;line-height:1.1;position:relative;display:inline-block}
+#strike{position:absolute;left:-10px;top:58%;height:12px;background:var(--sindoor);border-radius:6px;transform:rotate(-4deg)}
+#vivah{top:780px;height:380px;background:#fff;box-shadow:0 30px 70px rgba(214,46,85,.22);border:4px solid var(--sindoor)}
+#vivah .lbl{font-size:56px;color:var(--plum)}
+#vivah .amt{font-size:160px;line-height:1.05;color:var(--sindoor)}
+#vivah .small{font-size:44px;color:var(--plumsoft)}
+#ptitle{top:250px;font-size:80px}
+#ptag{top:1230px;font-size:60px}
+/* end */
+#logo{left:290px;top:250px;width:500px}
+#e1{top:770px;font-size:64px}
+#url{top:870px}
+#url span{display:inline-block;background:var(--sindoor);color:#fff;font-size:76px;padding:16px 56px 26px;border-radius:70px}
+#e2{top:1060px;font-size:46px;color:var(--plumsoft)}
+#share{top:1170px;left:120px;width:840px;border-radius:40px;background:#fff;border:3px dashed var(--lotus);padding:30px 40px;text-align:center}
+#share .a{font-size:54px}
+#share .b{font-size:50px;color:var(--plumsoft);margin-top:8px;line-height:1.25}
+</style></head>
+<body>
+<div id="bg" class="abs"></div>
+<div id="petals"></div>
+
+<div id="sticker" class="abs"><span>📌 Save kar lo, kaam aayega</span></div>
+<div id="ruko" class="abs c">RUKO ✋</div>
+<div id="h1" class="abs c hl">Shaadi ka card</div>
+<div id="h2" class="abs c hl">chhapwane se pehle</div>
+<div id="h3wrap" class="abs c"><span id="h3">ye 5 cheezein dekho 👇</span></div>
+
+<div id="bar" class="abs"><div><i></i></div><div><i></i></div><div><i></i></div><div><i></i></div><div><i></i></div></div>
+<div id="num" class="abs c"><span>#1 / 5</span></div>
+<div id="title" class="abs c">Title</div>
+<div id="sub" class="abs c">Sub</div>
+<div id="tick" class="abs">✓</div>
+
+<div id="phone" class="abs"><div id="screen"><img id="shot" src="src/f00001.jpg"><div id="flash" class="abs"></div><div id="tapdot" class="abs"></div></div><div id="island" class="abs"></div></div>
+
+<div id="ptitle" class="abs c">Aur kharcha? 👀</div>
+<div id="paper" class="abs card c"><div class="lbl">Paper wale cards 🗞️</div><div class="amt">₹5,000 – 50,000+<div id="strike"></div></div></div>
+<div id="vivah" class="abs card c"><div class="lbl">vivah.online 💌</div><div class="amt">sirf ₹799</div><div class="small">ek baar · har guest ke liye</div></div>
+<div id="ptag" class="abs c">Phone se, 5 min mein ready ⚡</div>
+
+<img id="logo" class="abs" src="logo-stacked-1810.png">
+<div id="e1" class="abs c">Free preview banao 👇</div>
+<div id="url" class="abs c"><span>vivah.online</span></div>
+<div id="e2" class="abs c">Pasand aaye tabhi pay karo</div>
+<div id="share" class="abs"><div class="a">📌 Save karo, baad mein kaam aayega</div><div class="b">💌 Us bestie ko bhejo<br>jiski shaadi aa rahi hai</div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const lin=(t,a,b)=>clamp((t-a)/(b-a));
+const eOut=x=>1-Math.pow(1-x,3);
+const eIn=x=>x*x*x;
+const eBack=x=>{const c=1.9;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const eInOut=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+function set(el,{o,x=0,y=0,s=1,r=0}){el.style.opacity=o;el.style.transform=`translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;}
+
+// petals
+const P=[];const pc=['#D62E55','#FF7A9C','#D2B0E6','#F5B342'];
+let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+for(let i=0;i<16;i++){const d=document.createElement('div');d.className='abs petal';d.style.background=pc[i%4];$('petals').appendChild(d);P.push({d,x:rnd()*1080,sp:40+rnd()*60,ph:rnd()*2000,sw:20+rnd()*40,rs:(rnd()-.5)*120,sc:.6+rnd()*.7});}
+
+const HOOK=2.0, IT=2.2, I0=2.0, PR=I0+5*IT, EN=PR+2.4;
+const items=[
+ {t:'Har guest ka apna naam',s:'Card khulte hi "Hi Neha" 🥹',a:0.5,sp:1.6,z:1.3,ox:.5,oy:.82},
+ {t:'Date ka scratch reveal',s:'Ragdo aur date dikhegi ✨',a:11.7,sp:2.0,z:1.4,ox:.5,oy:.42},
+ {t:'Live countdown ⏳',s:'Din, ghante, minute, sab',a:20.4,sp:1.2,z:1.35,ox:.5,oy:.62},
+ {t:'Venue, Maps ke saath 📍',s:'Chacha ji ab rasta nahi poochenge 😄',a:24.6,sp:1.3,z:1.3,ox:.5,oy:.5},
+ {t:'RSVP seedha WhatsApp pe 💬',s:'Kaun aa raha hai, turant pata ✅',a:38.4,sp:1.4,z:1.3,ox:.5,oy:.4},
+];
+let lastSrc='';
+function fit(el,base){el.style.fontSize=base+'px';let f=base;while(el.firstChild.offsetWidth>980&&f>40){f-=2;el.style.fontSize=f+'px';}}
+function render(t){
+ // petals drift
+ P.forEach(p=>{const y=((p.ph+t*p.sp*3)%2200)-140;p.d.style.transform=`translate(${p.x+Math.sin((t+p.ph)*1.3)*p.sw}px,${y}px) rotate(${t*p.rs+p.ph}deg) scale(${p.sc})`;});
+
+ // ---- HOOK ----
+ const hookOut=eIn(lin(t,HOOK-0.25,HOOK));
+ const shake=t<0.35?Math.sin(t*90)*14*(1-t/0.35):0;
+ set($('ruko'),{o:1-hookOut,s:1.25-0.25*eBack(lin(t,0,0.22)),x:shake,y:-hookOut*120});
+ set($('h1'),{o:lin(t,0.12,0.24)*(1-hookOut),y:(1-eOut(lin(t,0.12,0.35)))*60-hookOut*120});
+ set($('h2'),{o:lin(t,0.28,0.4)*(1-hookOut),y:(1-eOut(lin(t,0.28,0.5)))*60-hookOut*120});
+ set($('h3wrap'),{o:lin(t,0.5,0.6)*(1-hookOut),s:0.6+0.4*eBack(lin(t,0.5,0.8)),r:-2+Math.sin(t*6)*0.6,y:-hookOut*120});
+ set($('sticker'),{o:lin(t,0.9,1.05)*(1-hookOut),s:0.7+0.3*eBack(lin(t,0.9,1.2))});
+
+ // ---- PHONE ----
+ let py, po=1, ps=1, pr=0;
+ const hookUp=0.3+0.7*eOut(lin(t,0,0.55));
+ if(t<HOOK){py=1920-hookUp*(1920-880);pr=6-hookUp*2+Math.sin(t*3)*1;}
+ else {const k=eInOut(lin(t,HOOK-0.1,HOOK+0.45));py=880-k*(880-500);pr=4*(1-k);
+  if(t<PR){const lt=(t-I0)%IT;ps=1+0.035*(1-eOut(lin(lt,0,0.3)))*(t-I0>IT?1:0);}}
+ if(t>=PR-0.3){const k=eIn(lin(t,PR-0.3,PR+0.15));py+=k*1500;pr+=k*8;}
+ set($('phone'),{o:po,y:0,s:ps,r:pr});$('phone').style.top=py+'px';
+
+ // which screen frame
+ let src=1, flash=0, tap=0, zz=1, ox=.5, oy=.5;
+ if(t<I0){src=Math.round(0.5*30)+1;}
+ else{
+  const i=Math.min(4,Math.floor((t-I0)/IT)), lt=t-I0-i*IT, it=items[i];
+  let st=it.a+lt*it.sp; if(i===0){st=lt<1.0?0.5+lt*0.9:3.0+(lt-1.0)*1.5; flash=lt>=1.0?1-lin(lt,1.0,1.15):0;}
+  src=Math.round(st*30)+1;
+  zz=1+(it.z-1)*eInOut(lin(lt,0.2,0.8))*(1-eInOut(lin(lt,IT-0.25,IT)));ox=it.ox;oy=it.oy;
+  if(i===0){if(lt<1.0){zz=1+(it.z-1)*eInOut(lin(lt,0.0,0.45))*(1-eInOut(lin(lt,0.8,1.0)));}else{zz=1+0.25*eInOut(lin(lt,1.05,1.6))*(1-eInOut(lin(lt,IT-0.25,IT)));oy=.55;}}
+  if(i>0)flash=1-lin(lt,0,0.18);
+  if(i===0){tap=lin(lt,0.6,0.7)*(1-lin(lt,0.9,1.0));}
+ }
+ src=Math.max(1,Math.min(1260,src));
+ const s='src/f'+String(src).padStart(5,'0')+'.jpg';
+ if(s!==lastSrc){$('shot').src=s;lastSrc=s;}
+ $('flash').style.opacity=flash*0.6;
+ $('shot').style.transformOrigin=(ox*100)+'% '+(oy*100)+'%';$('shot').style.transform=`scale(${zz})`;
+ set($('tapdot'),{o:tap,s:0.6+0.6*tap});$('tapdot').style.left='227px';$('tapdot').style.top='880px';
+
+ // ---- ITEMS header ----
+ const inItems=t>=I0&&t<PR;
+ const itemsIn=lin(t,I0,I0+0.2), itemsOut=1-lin(t,PR-0.25,PR);
+ $('bar').style.opacity=itemsIn*itemsOut;
+ const bars=document.querySelectorAll('#bar i');
+ bars.forEach((b,j)=>{b.style.width=(clamp((t-I0-j*IT)/IT)*100)+'%'});
+ if(inItems||t<I0){
+  const i=clamp(Math.floor((t-I0)/IT),0,4), lt=t-I0-i*IT, it=items[i];
+  $('num').firstChild.textContent='#'+(i+1)+' / 5';
+  if($('title').textContent!==it.t){$('title').innerHTML='<span>'+it.t+'</span>';$('sub').innerHTML='<span>'+it.s+'</span>';fit($('title'),86);fit($('sub'),48);}
+  const ent=eBack(lin(lt,0,0.3)), ex=i<4?eIn(lin(lt,IT-0.15,IT)):0;
+  const o=(t<I0?0:1)*itemsOut;
+  set($('num'),{o:o*lin(lt,0,0.1),s:0.5+0.5*ent});
+  set($('title'),{o:o*lin(lt,0.03,0.15)*(1-ex),x:(1-eOut(lin(lt,0.03,0.3)))*160-ex*160});
+  set($('sub'),{o:o*lin(lt,0.18,0.3)*(1-ex),y:(1-eOut(lin(lt,0.18,0.4)))*30});
+  // tick pops near end of each item, attached to the phone's top-right corner
+  const tk=lin(lt,1.55,1.75);
+  set($('tick'),{o:o*tk*(1-ex),s:0.3+0.7*eBack(tk),r:(1-tk)*-90});
+  $('tick').style.left='790px';$('tick').style.top=(py-30)+'px';
+ } else {['num','title','sub','tick'].forEach(k=>$(k).style.opacity=0);}
+
+ // ---- PRICE ----
+ const pIn=t>=PR-0.05, pOut=1-eIn(lin(t,EN-0.25,EN));
+ const lp=t-PR;
+ set($('ptitle'),{o:pIn?lin(lp,0,0.15)*pOut:0,y:(1-eOut(lin(lp,0,0.3)))*-60});
+ set($('paper'),{o:pIn?lin(lp,0.05,0.2)*pOut:0,x:(1-eOut(lin(lp,0.05,0.4)))*-900});
+ $('strike').style.width=(eOut(lin(lp,0.6,0.85))*103)+'%';
+ const vin=lin(lp,0.95,1.2);
+ set($('vivah'),{o:pIn?vin*pOut:0,s:1.6-0.6*eBack(vin),r:(1-vin)*-6});
+ set($('ptag'),{o:pIn?lin(lp,1.5,1.65)*pOut:0,y:(1-eOut(lin(lp,1.5,1.8)))*40});
+ set($('paper'),{o:pIn?lin(lp,0.05,0.2)*pOut*(1-0.35*lin(lp,1.0,1.3)):0,x:(1-eOut(lin(lp,0.05,0.4)))*-900,s:1-0.05*lin(lp,1.0,1.3)});
+
+ // ---- END ----
+ const le=t-EN, eon=t>=EN;
+ set($('logo'),{o:eon?lin(le,0,0.2):0,s:0.7+0.3*eBack(lin(le,0,0.4))});
+ set($('e1'),{o:eon?lin(le,0.3,0.45):0,y:(1-eOut(lin(le,0.3,0.55)))*40});
+ const pulse=1+0.04*Math.sin(Math.max(0,le-0.8)*7)*lin(le,0.8,1.0);
+ set($('url'),{o:eon?lin(le,0.45,0.6):0,s:(0.6+0.4*eBack(lin(le,0.45,0.75)))*pulse});
+ set($('e2'),{o:eon?lin(le,0.7,0.85):0});
+ set($('share'),{o:eon?lin(le,1.0,1.2):0,y:(1-eOut(lin(le,1.0,1.35)))*80});
+}
+window.render=render;
+window.imgReady=()=>{const im=$('shot');return im.complete?Promise.resolve():new Promise(r=>{im.onload=r;im.onerror=r;});};
+render(0);
+</script>
+</body></html>

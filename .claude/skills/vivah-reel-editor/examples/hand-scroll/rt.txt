@@ -1,0 +1,1 @@
+[0:v]trim=0.4:2.17,setpts=(PTS-STARTPTS)*0.56497,fps=30[s0];[0:v]trim=2.17:4.73,setpts=(PTS-STARTPTS)*0.62500,fps=30[s1];[0:v]trim=4.73:6.94,setpts=(PTS-STARTPTS)*0.36199,fps=30[s2];[0:v]trim=6.94:11.71,setpts=(PTS-STARTPTS)*0.88050,fps=30[s3];[0:v]trim=11.71:31.6,setpts=(PTS-STARTPTS)*0.39718,fps=30[s4];[s0][s1][s2][s3][s4]concat=n=5:v=1:a=0[out]

@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Huninn&display=block">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;background:transparent;overflow:hidden}
+#bg{position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,#FDE8EC 0%,#F6CBD5 70%,#EDB3C1 100%)}
+#frame{position:absolute;left:140px;top:250px;width:800px;height:1362px;border-radius:44px;box-shadow:0 30px 80px rgba(61,31,46,.35);border:8px solid #fff}
+#chip{position:absolute;left:50%;top:120px;transform:translateX(-50%);background:#fff;border-radius:60px;padding:18px 40px;font-family:Poppins;font-weight:800;font-size:46px;color:#3D1F2E;white-space:nowrap;box-shadow:0 8px 24px rgba(61,31,46,.18)}
+#chip b{color:#D62E55}
+#end{position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,#7B3FA8 0%,#5B2A86 45%,#3D1F2E 100%);display:none;flex-direction:column;align-items:center;padding-top:300px;color:#fff;text-align:center}
+#end .l{font-family:Huninn;font-size:64px;line-height:1.25}
+#end .u{margin-top:60px;background:#fff;color:#D62E55;font-family:Poppins;font-weight:900;font-size:84px;padding:18px 60px;border-radius:80px}
+#end .p{margin-top:70px;font-family:Poppins;font-weight:800;font-size:56px}
+#end .p span{font-size:120px;display:block;color:#FFD86B;line-height:1.05}
+#end .c{margin-top:50px;border:6px dashed #FFD86B;border-radius:30px;padding:20px 44px;font-family:Poppins;font-weight:800;font-size:50px}
+#end .c b{color:#FFD86B}
+#end .s{margin-top:40px;font-family:Poppins;font-weight:600;font-size:34px;letter-spacing:3px;opacity:.85}
+</style></head><body>
+<div id="bg"></div><div id="frame"></div><div id="chip"></div>
+<div id="end"><div class="l">Apni shaadi ki<br>personal website banao 💌</div><div class="u">vivah.online</div>
+<div class="p">Sab kuch sirf<span>₹799</span></div><div class="c">Code <b>NEW30</b> = 30% off</div>
+<div class="s">NAAM WALA INVITE · VENUE · RSVP</div></div>
+<script>
+window.setMode=(m,chip)=>{document.getElementById('bg').style.display=m=='bg'?'block':'none';
+document.getElementById('frame').style.display=m=='frame'?'block':'none';
+document.getElementById('chip').style.display=m=='chip'?'block':'none';
+document.getElementById('chip').innerHTML=chip||'';
+document.getElementById('end').style.display=m=='end'?'flex':'none';}
+</script></body></html>
