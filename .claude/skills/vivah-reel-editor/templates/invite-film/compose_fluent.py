@@ -21,7 +21,7 @@ FLUENT = {"swan": "Swan", "peacock": "Peacock", "lotus": "Lotus", "rosette": "Ro
           "bride": "Person with veil", "groom": "Person in tuxedo", "amphora": "Amphora", "diya": "Diya lamp", "bell": "Bell",
           "lantern": "Red paper lantern", "umbrella": "Umbrella", "sunflower": "Sunflower", "leaf": "Leaf fluttering in wind",
           "henna": "Palm up hand", "hands": "Raising hands", "clap": "Clapping hands", "sparkles": "Sparkles", "blossom": "Blossom",
-          "tulip": "Tulip", "mango": "Mango", "flute": "Flute", "notes": "Musical notes", "bouquet": "Bouquet"}
+          "tulip": "Tulip", "mango": "Mango", "flute": "Flute", "notes": "Musical notes", "bouquet": "Bouquet", "fire": "Fire", "gem": "Gem stone", "heart": "Red heart"}
 
 def fetch():
     for n, name in FLUENT.items():
@@ -137,6 +137,23 @@ def _scene(c, kind, W, H):
         for i in range(24): put(c, S(random.choice(['hibiscus', 'cherry', 'rosette']), 56, rot=random.randint(0, 360)), random.uniform(0, W), random.uniform(680, 790), shadow=False)
         put(c, S('drum', 140), 90, 580); put(c, S('elephant', 300), 300, 500); put(c, S('horse', 260, flip=True), 580, 520)
         put(c, S('groom', 150), 600, 340); put(c, S('drum', 140), 810, 580)
+    elif kind == 'ring':    # ring ceremony: couple facing, big ring between, sparkles + bouquets
+        floor(c, 640, (240, 214, 200, 255), (200, 120, 140, 255))
+        put(c, S('bride', 300), 230, 470); put(c, S('groom', 300), 670, 470)
+        put(c, S('ring', 170, rot=-12), 450, 330); put(c, S('sparkles', 90), 540, 230); put(c, S('sparkles', 70), 360, 250)
+        put(c, S('heart', 70), 450, 480)
+        for x in (80, 820): put(c, S('bouquet', 120), x, 650)
+    elif kind == 'phere':   # mandap with the sacred fire in the middle, couple on both sides
+        d = ImageDraw.Draw(c)
+        d.rounded_rectangle([60, 700, W - 60, 760], 18, fill=(230, 150, 175, 255))
+        for x in (130, W - 130):
+            d.rounded_rectangle([x - 26, 230, x + 26, 710], 12, fill=(244, 196, 210, 255)); string(c, x, 230, 690, 32, ('rosette', 'hibiscus'), end=None)
+        d.pieslice([70, 90, W - 70, 380], 180, 360, fill=(240, 170, 195, 255)); d.rectangle([70, 225, W - 70, 260], fill=(230, 120, 160, 255))
+        swag(c, 100, W - 100, 250, 60, 34, ('rosette', 'hibiscus'))
+        d.rectangle([380, 600, 520, 690], fill=(200, 120, 80, 255)); d.rectangle([370, 590, 530, 610], fill=(170, 90, 60, 255))  # havan kund
+        put(c, S('fire', 140), 450, 530)
+        put(c, S('bride', 230), 270, 560); put(c, S('groom', 230), 630, 560)
+        for x in (330, 570): put(c, S('diya', 70), x, 690)
     elif kind == 'vivah':   # mandap: two pillars + canopy, garlanded, couple inside
         d = ImageDraw.Draw(c)
         d.rounded_rectangle([60, 700, W - 60, 760], 18, fill=(230, 150, 175, 255))
@@ -148,7 +165,7 @@ def _scene(c, kind, W, H):
         put(c, S('bride', 250), 360, 560); put(c, S('groom', 250), 560, 560); put(c, S('diya', 90), 450, 700)
     # stretch the floor row (first opaque row from the bottom-left) across the full width, then place the scene
     FLOOR = {'haldi': ((222, 199, 170), 600), 'mehendi': ((236, 218, 180), 620), 'sangeet': ((232, 205, 170), 640),
-             'chaak': ((160, 200, 110), 600), 'baraat': ((238, 130, 160), 650)}
+             'chaak': ((160, 200, 110), 600), 'baraat': ((238, 130, 160), 650), 'ring': ((240, 214, 200), 640)}
     if kind in FLOOR:
         col, y = FLOOR[kind]; band = c.crop((0, y, 1, H)).resize((full.width, H - y))
         full.alpha_composite(band, (0, y))
@@ -218,6 +235,7 @@ if __name__ == '__main__':
     save(wreath(), 'monogram-wreath.png'); save(arch(), 'intro-arch.png'); save(plants(), 'intro-plants-left.png')
     save(garden(), 'intro-garden-pond.png'); swan = canvas(190, 190); put(swan, S('swan', 170), 95, 95, shadow=False); save(swan, 'swan.png')
     for fn, st, pr in (('haldi', 'haldi', 'matka'), ('mehendi', 'mehendi', None), ('sangeet', 'sangeet', 'drum'),
-                       ('chaak', 'chaak', 'diya'), ('baraat', 'baraat', 'umbrella'), ('vivah', 'vivah', None)):
+                       ('chaak', 'chaak', 'diya'), ('baraat', 'baraat', 'umbrella'), ('vivah', 'vivah', None),
+                       ('ring', 'sangeet', 'diya'), ('phere', 'vivah', None)):
         save(toran(style=st), f'{fn}-top.png'); save(scene(fn), f'{fn}-main.png')
         if pr: save(prop(pr), f'{fn}-prop.png')
