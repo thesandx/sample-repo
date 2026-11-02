@@ -48,3 +48,11 @@ garden arch, a pond with railing. Deity card uses the official Jain Prateek Chih
 `commons.wikimedia.org/wiki/Special:FilePath/Jainism.svg?width=800` returns a PNG; Wikimedia rate-limits,
 retry later). Openclipart (CC0) is reachable too but its art is inconsistent. First film made this way:
 2 Nov 2026, Aarav & Siya sample.
+
+## Bright natural photo version (Sandeep's pick, 2 Nov 2026: "no emoji, natural, colourful and bright")
+`flickr_fetch.py` searches Flickr restricted to CC BY / CC0 / Public Domain (`license=4,9,10`) and writes
+`credits.tsv`. Avoid photos of identifiable people (no model release); use hands, rings, puja, garlands,
+fire, temples. `compose_photo.py photos/ art/ jain-emblem.png picks.json` makes: real marigold-garland
+toran on top, each photo in a gold arch, bright gradient + bokeh background per function. details.json
+uses `art.bg`, `art.boxes` (top [0,0,1080,330], main [0,1080,1080,840]), `zoom: 0.04`, `text_y: 420`,
+`intro_dy: 110`, and `credits` (adds a 3 s CC BY attribution card, required by the licence).
