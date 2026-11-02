@@ -1,0 +1,43 @@
+{
+  "_note": "Fill this in, put the art PNGs in art/, then: python3 make_data.py details.json > data.js. Art names below are file names inside art/. Any missing PNG renders as a labelled placeholder box.",
+  "bg": "#F7EBD3",
+  "ink": "#4A3524",
+  "deity": {"line": "|| Shri Ganeshay Namah ||", "art": "deity.png"},
+  "family_line": "Sharma & Verma Family",
+  "invite_line": "Cordially Invites You for\nWedding Ceremony of",
+  "monogram_art": "monogram-wreath.png",
+  "monogram_letters": "P  R",
+  "couple_line": "Priya & Rahul",
+  "groom": {
+    "name": "Rahul",
+    "grand": "(GRAND S/O Smt. Kamla Devi &\nShri Ramesh Verma)",
+    "rel": "S/O",
+    "parents": "(Smt. Sunita Verma &\nShri Anil Verma)"
+  },
+  "bride": {
+    "name": "Priya",
+    "grand": "(GRAND D/O Smt. Shanti Devi &\nShri Mohan Sharma)",
+    "rel": "D/O",
+    "parents": "(Smt. Meena Sharma &\nShri Rajesh Sharma)"
+  },
+  "intro_art": {
+    "arch": "intro-arch.png",
+    "plants": "intro-plants-left.png",
+    "garden": "intro-garden-pond.png",
+    "swan": "swan.png"
+  },
+  "functions": [
+    {"name": "Haldi", "tagline": "", "date": "18 April 2026", "day": "Saturday", "time": "11:00 AM onwards", "venue": "Venue - At Our Residence",
+     "art": {"top": "haldi-top.png", "main": "haldi-main.png", "prop": "haldi-prop.png"}},
+    {"name": "Mehendi", "tagline": "(Khushiyon se bhari Mehendi\nki ek khubsurat shaam)", "date": "19 April 2026", "day": "Sunday", "time": "7:00 PM onwards", "venue": "",
+     "art": {"top": "mehendi-top.png", "main": "mehendi-main.png", "prop": ""}},
+    {"name": "Sangeet", "tagline": "(Geet-sangeet aur rishton\nka rangmanch)", "date": "19 April 2026", "day": "Sunday", "time": "8:30 PM onwards", "venue": "Venue - At Our Residence",
+     "art": {"top": "sangeet-top.png", "main": "sangeet-main.png", "prop": "sangeet-prop.png"}},
+    {"name": "Chaak", "tagline": "(Sanskaar aur rishton ka\nsundar sangam)", "date": "20 April 2026", "day": "Monday", "time": "2:00 PM onwards", "venue": "Venue - At Our Residence",
+     "art": {"top": "chaak-top.png", "main": "chaak-main.png", "prop": "chaak-prop.png"}},
+    {"name": "Baraat Prasthan", "tagline": "(Dhak-dhak dholon ke saath\nravana hui khushiyon ki baraat)", "date": "21 April 2026", "day": "Tuesday", "time": "Time - 4:00 PM", "venue": "",
+     "art": {"top": "baraat-top.png", "main": "baraat-main.png", "prop": "baraat-prop.png"}},
+    {"name": "Shubh Vivah", "tagline": "(Saat phere saat vachan)", "date": "21 April 2026", "day": "Tuesday", "time": "", "venue": "Venue\nBanquet Hall / Resort\nCity, State",
+     "art": {"top": "vivah-top.png", "main": "vivah-main.png", "prop": ""}}
+  ]
+}
