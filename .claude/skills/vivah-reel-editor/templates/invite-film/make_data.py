@@ -36,7 +36,7 @@ def fn_layers(art, style):
         L.append(dict(src=art['prop'], x=30, y=y, w=200, h=320, **{'in': 'pop'}, at=(0.9 if pops else 0.35), bob=3))
         L.append(dict(src=art['prop'], x=850, y=y, w=200, h=320, mirror=True, **{'in': 'pop'}, at=(1.1 if pops else 0.45), bob=3, ph=1.3))
     if art.get('main'):
-        L.append(dict(src=art['main'], x=90, y=1120, w=900, h=800, **{'in': 'pop' if pops else 'fade'},
+        L.append(dict(src=art['main'], x=0, y=1120, w=1080, h=800, **{'in': 'pop' if pops else 'fade'},
                       at=(0.3 if pops else 0), dur=(0.7 if pops else 0.25), breathe=0.006))
     return L
 
@@ -54,8 +54,8 @@ def build(d, fit=None):
     c1, c2, c3 = INTRO_CARDS
     g, b = d['groom'], d['bride']
     cards = [
-        dict(t0=0, t1=c1, layers=[dict(src=d['deity']['art'], x=330, y=300, w=420, h=420, **{'in': 'blur'}, at=0.5, dur=1.2)],
-             lines=[dict(txt=d['deity']['line'], style='body', y=760, size=42, at=2.0)]),
+        dict(t0=0, t1=c1, layers=[dict(src=d['deity']['art'], x=330, y=230, w=420, h=520, **{'in': 'blur'}, at=0.5, dur=1.2)],
+             lines=[dict(txt=d['deity']['line'], style='body', y=790, size=42, at=2.0)]),
         dict(t0=c1, t1=c1 + c2, layers=[dict(src=d['monogram_art'], x=340, y=560, w=400, h=400, **{'in': 'pop'}, at=3.8, dur=0.8)],
              lines=[dict(txt=d['family_line'], style='script2', y=330, at=0.5),
                     dict(txt=d['invite_line'], style='serif', y=420, size=38, at=1.4),

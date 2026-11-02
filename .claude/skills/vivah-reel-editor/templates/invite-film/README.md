@@ -39,3 +39,12 @@ mirrored for right), `intro-garden-pond.png` (railing + bushes + peacock + pond 
 Per function: `<fn>-top.png` (full-width toran / garland / canopy, ~1080x450), `<fn>-main.png`
 (the scene: characters doing that ritual, on a floor, ~900x800), optional `<fn>-prop.png` (matka /
 lantern / umbrella / dhol; mirrored on the other side).
+
+## Self-sourced art (no uploads needed): `compose_fluent.py`
+`python3 compose_fluent.py <sprite_cache> art/ <jain-emblem.png>` builds every slot from fetched assets:
+Microsoft Fluent 3D emoji (MIT, jsdelivr: rosette = marigold, swan, peacock, lotus, elephant, horse, dhol,
+dancer, bride, groom, diya, lantern, bell, amphora = matka...) arranged into torans, garlands, a mandap, a
+garden arch, a pond with railing. Deity card uses the official Jain Prateek Chihna (public domain;
+`commons.wikimedia.org/wiki/Special:FilePath/Jainism.svg?width=800` returns a PNG; Wikimedia rate-limits,
+retry later). Openclipart (CC0) is reachable too but its art is inconsistent. First film made this way:
+2 Nov 2026, Aarav & Siya sample.
