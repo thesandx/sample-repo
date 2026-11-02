@@ -1,0 +1,150 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Illustrated wedding video-invite engine (structure/timing copied from IG reel DWbD-OMCRcG).
+     All content comes from data.js (window.INVITE). Art PNGs live in art/. Missing art renders as a
+     labelled placeholder box so the layout can be checked before the art arrives. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@144,800&family=Lexend:wght@500;600&family=Lora:wght@500;600&family=Great+Vibes&family=Pinyon+Script&display=block">
+<script src="data.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden}
+body{position:relative;background:var(--bg,#F7EBD3);font-family:'Lexend',sans-serif;color:var(--ink,#4A3524)}
+#stage{position:absolute;inset:0;overflow:hidden}
+.pg{position:absolute;inset:0}
+.ly{position:absolute;will-change:transform}
+.ly img{width:100%;height:100%;object-fit:contain;display:block}
+.ph{width:100%;height:100%;border:4px dashed rgba(120,90,60,.45);background:rgba(200,170,130,.18);border-radius:18px;
+ display:flex;align-items:center;justify-content:center;text-align:center;font:600 30px/1.2 'Lexend';color:rgba(90,65,40,.7);padding:10px}
+.tx{position:absolute;left:60px;right:60px;text-align:center;white-space:pre-line}
+.title{font-family:'Fraunces',serif;font-weight:800;font-size:66px;line-height:1.1}
+.body{font-family:'Lexend';font-weight:600;font-size:40px;line-height:1.3}
+.small{font-family:'Lexend';font-weight:500;font-size:32px;line-height:1.35}
+.serif{font-family:'Lora',serif;font-weight:600;font-size:40px;line-height:1.3}
+.script{font-family:'Great Vibes',cursive;font-size:120px;line-height:1.05;text-shadow:3px 4px 4px rgba(60,40,20,.35)}
+.script2{font-family:'Pinyon Script',cursive;font-size:64px;line-height:1.1}
+/* royal theme: maroon velvet + gold foil text with a moving shine (set data theme:"royal") */
+body.royal{background:radial-gradient(ellipse at 50% 38%,#7a1f33 0%,#5a1424 55%,#3a0c18 100%)}
+body.royal .tx{background:linear-gradient(100deg,#b8862f 0%,#f3d98b 30%,#fff6d6 var(--shp,40%),#e7c46a 55%,#a8761f 100%);
+ background-size:100% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+body.royal .script{filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}
+body.royal .ph{border-color:rgba(240,200,120,.5);color:rgba(240,210,150,.8);background:rgba(255,220,150,.08)}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#dim{position:absolute;inset:0;background:#6d6b66;opacity:0;pointer-events:none}
+</style></head>
+<body><div id="stage"></div><div id="dim"></div><div id="flash"></div>
+<script>
+const D = window.INVITE;
+const W = 1080, H = 1920;
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const eOut = x => 1 - Math.pow(1 - clamp(x), 3);
+const eBack = x => { x = clamp(x); const c = 1.70158; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const stage = document.getElementById('stage');
+const T = D.timing;                       // shared animation constants (seconds)
+const imgs = [];
+
+// ---- build DOM -------------------------------------------------------------------------
+function layerEl(L) {
+  const d = document.createElement('div'); d.className = 'ly';
+  Object.assign(d.style, {left: L.x + 'px', top: L.y + 'px', width: L.w + 'px', height: L.h + 'px'});
+  d.style.transformOrigin = L.origin || (L.in === 'drop' ? '50% 0%' : '50% 100%');
+  const im = new Image(); im.src = 'art/' + L.src;
+  im.onerror = () => { d.innerHTML = `<div class="ph">${L.src}<br>${L.w}×${L.h}</div>`; };
+  if (L.mirror) im.style.transform = 'scaleX(-1)';
+  imgs.push(im); d.appendChild(im); return d;
+}
+function textEl(t) {
+  const d = document.createElement('div'); d.className = 'tx ' + (t.style || 'body');
+  d.textContent = t.txt; d.style.top = t.y + 'px';
+  if (t.size) d.style.fontSize = t.size + 'px';
+  if (t.color) d.style.color = t.color;
+  return d;
+}
+// pages: [{t0,t1,in,out,layers,cards:[{t0,t1,lines}]}]  (function pages have one card)
+D.pages.forEach(P => {
+  const pg = document.createElement('div'); pg.className = 'pg'; P.el = pg;
+  (P.layers || []).forEach(L => { L.el = layerEl(L); pg.appendChild(L.el); });
+  P.cards = P.cards || [{t0: P.t0, t1: P.t1, lines: P.lines}];
+  P.cards.forEach(C => { (C.layers || []).forEach(L => { L.el = layerEl(L); pg.appendChild(L.el); });
+    C.lines.forEach(t => { t.el = textEl(t); pg.appendChild(t.el); }); });
+  stage.appendChild(pg);
+});
+
+// ---- animation -------------------------------------------------------------------------
+// entrance of an art layer at local time lt (s since its own start)
+function enter(L, lt, P) {
+  const k = lt / (L.dur || T.layerIn);
+  let tf = '', op = 1;
+  switch (L.in) {
+    case 'drop': tf = `translateY(${(1 - eOut(k)) * -(L.h + L.y + 40)}px)`; break;          // top border falls in
+    case 'rise': tf = `translateY(${(1 - eOut(k)) * (H - L.y + 40)}px)`; break;              // slides up from bottom edge
+    case 'pop':  tf = `scale(${k <= 0 ? 0 : eBack(k)})`; break;                               // grows from a dot (overshoot)
+    case 'fade': op = clamp(k); break;
+    case 'blur': op = clamp(k); L.el.style.filter = `blur(${(1 - eOut(k)) * 18}px)`; break;
+    default: break;                                                                           // 'none' = already there
+  }
+  // idle life after entering
+  const it = Math.max(0, lt);
+  if (L.sway) tf += ` rotate(${Math.sin(it * 1.6 + (L.ph || 0)) * L.sway}deg)`;
+  if (L.bob) tf += ` translateY(${Math.sin(it * 2.2 + (L.ph || 0)) * L.bob}px)`;
+  if (L.zoom) tf += ` scale(${1 + L.zoom * Math.min(it, 12) / 12})`;            // slow Ken Burns push-in on photos
+  if (L.breathe) tf += ` scale(${1 + Math.sin(it * 1.4 + (L.ph || 0)) * L.breathe})`;
+  if (L.drift) {                       // swans: slow back-and-forth glide, flip when turning
+    const s = Math.sin(it * (L.driftSpeed || 0.25) + (L.ph || 0));
+    tf += ` translateX(${s * L.drift}px) scaleX(${Math.cos(it * (L.driftSpeed || 0.25) + (L.ph || 0)) >= 0 ? 1 : -1})`;
+  }
+  L.el.style.transform = tf; L.el.style.opacity = op;
+}
+// soft left-to-right wipe reveal (the reference reveals every text line like this)
+function reveal(el, k) {
+  const p = -30 + eOut(k) * 160;  // gradient edge from -30% to 130%
+  const m = `linear-gradient(90deg,#000 ${p - 30}%,transparent ${p}%)`;
+  el.style.webkitMaskImage = m; el.style.maskImage = m;
+  el.style.opacity = k <= 0 ? 0 : 1;
+  el.style.filter = `blur(${(1 - eOut(k)) * 3}px)`;
+}
+
+window.render = function (t) {
+  let flash = 0, dim = 0;
+  D.pages.forEach((P, i) => {
+    const on = t >= P.t0 - (P.in === 'blur' ? T.blur : 0) && t < P.t1;
+    P.el.style.display = on ? 'block' : 'none';
+    if (!on) return;
+    const lt = t - P.t0;
+    // page-level filter for blur transitions (out at end of page, in at start)
+    let blur = 0;
+    const next = D.pages[i + 1];
+    if (next && next.in === 'blur' && t > P.t1 - T.blur) { const k = (t - (P.t1 - T.blur)) / T.blur; blur = eOut(k) * 40; dim = Math.max(dim, k * .9); }
+    if (P.in === 'blur' && lt < T.blur) { const k = 1 - lt / T.blur; blur = Math.max(blur, k * 40); dim = Math.max(dim, k * .9); }
+    // 'popout' : every layer shrinks away in the last T.popOut seconds, text fades
+    const outK = next && next.in === 'popout' ? clamp((t - (P.t1 - T.popOut)) / T.popOut) : 0;
+    P.el.style.filter = blur ? `blur(${blur}px)` : 'none';
+    (P.layers || []).forEach(L => {
+      enter(L, lt - (L.at || 0), P);
+      if (outK > 0) L.el.style.transform += ` scale(${1 - eOut(outK)})`;
+    });
+    P.cards.forEach(C => {
+      const ct = t - C.t0, active = t >= C.t0 && t < C.t1;
+      const fadeOut = C.t1 < P.t1 ? clamp((t - (C.t1 - T.cardOut)) / T.cardOut) : 0;
+      (C.layers || []).forEach(L => { L.el.style.display = active ? 'block' : 'none'; if (active) { enter(L, ct - (L.at || 0), P); L.el.style.opacity *= 1 - fadeOut; } });
+      C.lines.forEach((ln, j) => {
+        if (!active) { ln.el.style.opacity = 0; return; }
+        const start = (ln.at != null ? ln.at : (C.textAt != null ? C.textAt : T.textAt) + j * (C.stagger || T.stagger));
+        reveal(ln.el, (ct - start) / T.wipe);
+        if (fadeOut) ln.el.style.opacity = 1 - fadeOut;
+        if (outK) ln.el.style.opacity = 1 - outK;
+      });
+    });
+    // white flash at the cut into this page
+    if (P.in === 'flash') flash = Math.max(flash, lt < 0 ? 0 : clamp(1 - lt / T.flash));
+  });
+  D.pages.forEach(P => { if (P.in === 'flash' && t < P.t0 && t > P.t0 - T.flash * .4) flash = Math.max(flash, 1 - (P.t0 - t) / (T.flash * .4)); });
+  document.body.style.setProperty('--shp', (((t * 22) % 160) - 30) + '%');   // foil shine sweeps every ~7 s
+  document.getElementById('flash').style.opacity = flash * .85;
+  document.getElementById('dim').style.opacity = dim * .55;
+};
+window.imgReady = () => Promise.all(imgs.map(i => i.complete ? 1 : new Promise(r => { i.onload = i.onerror = r; })));
+if (D.theme) document.body.classList.add(D.theme);
+document.body.style.setProperty('--bg', D.bg || '#F7EBD3');
+document.body.style.setProperty('--ink', D.ink || '#4A3524');
+window.render(0);
+</script></body></html>

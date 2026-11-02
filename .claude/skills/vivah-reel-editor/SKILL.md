@@ -91,6 +91,8 @@ spot-check stills → full render → cover jpg → deliver
 - All 38 effects from the two "Claude video effects" listicles, each with a build recipe and a
   vivah use: `reference/effects-catalog.md`.
 - Generating Priya (and bestie/mom/saas) clips, prompts that worked, costs: `reference/openrouter.md`.
+- Illustrated wedding **video invite** template (copy of IG DWbD-OMCRcG: intro + one page per
+  function, data-driven, art supplied by Sandeep): `templates/invite-film/README.md`.
 - Recording the real site (prod demo invite, local vivah repo create flow, Sandeep's phone
   recording and its privacy crops, green-screen hand compositing): `reference/site-recording.md`.
 - Every reel made so far, its format, cost, Sandeep's verdict and the lesson:
