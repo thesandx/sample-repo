@@ -32,7 +32,7 @@ bash build.sh details.json /mnt/project-files/reels/invite-<couple>.mp4 [song.mp
 Full render is ~2,550 frames (85 s at 30 fps), a few minutes, free.
 
 ## Art shot list (all transparent PNG, same flat-illustration style, ideally one Freepik/Vecteezy pack)
-Intro: `deity.png` (Ganesh / Mahavir / etc, ~1:1), `monogram-wreath.png` (floral ring, empty centre),
+Intro: `mahavir.png` (Bhagwan Mahavir seated, with halo, ~1:1; Jain default), `monogram-wreath.png` (floral ring, empty centre),
 `intro-arch.png` (full-width arch/jharokha top frame, 1080x820), `intro-plants-left.png` (tall garden plants,
 mirrored for right), `intro-garden-pond.png` (railing + bushes + peacock + pond strip, 1080x700),
 `swan.png` (one swan facing right).
