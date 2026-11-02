@@ -9,7 +9,7 @@ DUR=$(python3 -c "import re;print(re.search(r'\"duration\": ([0-9.]+)',open('dat
 FR=$(mktemp -d)
 node ../../scripts/render_frames.js invite.html "$FR" "$DUR"
 # light paper grain so the flat cream doesn't look synthetic
-ffmpeg -v error -y -framerate 30 -i "$FR/%05d.jpg" -vf "noise=alls=4:allf=t,format=yuv420p" -c:v libx264 -crf 17 -preset slow -movflags +faststart "$OUT.video.mp4"
+ffmpeg -v error -y -framerate 30 -i "$FR/%05d.jpg" -vf "noise=alls=4:allf=t,format=yuv420p" -c:v libx264 -crf 26 -preset slow -tune grain -movflags +faststart "$OUT.video.mp4"
 if [ -n "$MUSIC" ]; then
   ffmpeg -v error -y -i "$OUT.video.mp4" -i "$MUSIC" -filter_complex "[1:a]atrim=0:$DUR,afade=t=in:d=0.5,afade=t=out:st=$(python3 -c "print($DUR-2)"):d=2,loudnorm=I=-14:TP=-1.5[a]" \
     -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -shortest "$OUT"
